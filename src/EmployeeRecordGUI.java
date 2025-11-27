@@ -14,7 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 //File scanner
 import java.util.Scanner;
-
+/**
+ * The {@code EmployeeRecordGUI} class provides a graphical interface for managing employee records
+ * within the Terralina Database Management System.
+ * <p>
+ * It allows users to:
+ * <ul>
+ *   <li>Add new employee records with validation</li>
+ *   <li>Delete existing employee records by ID</li>
+ *   <li>Display current employee records in a sortable table</li>
+ *   <li>Return to the manager dashboard</li>
+ * </ul>
+ * This class connects to the embedded SQLite database via {@link DBHelper.employeeRecords}
+ * and uses {@link DefaultTableModel} to render query results in a {@code JTable}.
+ */
 //Declaring primary class
 public class EmployeeRecordGUI extends JFrame {
     //Declaring class attributes
@@ -32,7 +45,12 @@ public class EmployeeRecordGUI extends JFrame {
     private final List<EmployeeRecord> employeeRecords = new ArrayList<>();
     employeeRecords db3 = new employeeRecords();//Connection to query setups
     ArrayList<ArrayList<Object>> data3 = new ArrayList<>();//Table ros and columns.
-
+    /**
+     * Constructs the {@code EmployeeRecordGUI} window.
+     * <p>
+     * Initializes the layout, sets up button actions for CRUD operations,
+     * and connects to the {@code employeeRecords} database table.
+     */
     //GUI setters
     public EmployeeRecordGUI() {
         setTitle("Record Dashboard");//Title
@@ -41,7 +59,12 @@ public class EmployeeRecordGUI extends JFrame {
         setSize(500, 550);//Set size
         setVisible(true);//Display panel
         setLocationRelativeTo(null);//Location of popup menu
-
+        /**
+         * Action listener for adding a new employee record.
+         * <p>
+         * Prompts the user for employee details, validates input,
+         * inserts the record into the database, and refreshes the table.
+         */
         // Add new employee and save into the file.
         // Add new employee and save into the file.
         addNewInfoButton.addActionListener(e -> {
@@ -93,7 +116,12 @@ public class EmployeeRecordGUI extends JFrame {
                 JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
             }
         });
-
+/**
+ * Action listener for deleting an employee record.
+ * <p>
+ * Prompts for an employee ID, deletes the record from the database,
+ * and refreshes the table display.
+ */
         // Delete employee and save
         deleteEmployeeButton.addActionListener(e -> {
             try {
@@ -126,6 +154,12 @@ public class EmployeeRecordGUI extends JFrame {
             }
 
         });
+        /**
+         * Action listener for displaying all employee records.
+         * <p>
+         * Queries the database and populates the table with current records.
+         * Also prints the data to the console for verification.
+         */
         // Display current employee records
         displyRecordsButton.addActionListener(e -> {
             try {
@@ -147,6 +181,12 @@ public class EmployeeRecordGUI extends JFrame {
                 ex.printStackTrace();//Displays error message
             }
         });
+
+        /**
+         * Action listener for returning to the manager dashboard.
+         * <p>
+         * Launches {@code ManaMenuGUI} and closes the current window.
+         */
         // Return to manager menu
         mainMenuButton.addActionListener(e -> {
             //Notify user of action
